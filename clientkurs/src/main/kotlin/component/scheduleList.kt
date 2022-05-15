@@ -24,7 +24,8 @@ fun fcScheduleList() = fc("ScheduleList") { props: ScheduleListProps ->
     h2 { +"Schedule:" }
     styledTable {
         css {
-            width = 500.px
+            width = 400.px
+            borderSpacing = 0.px
             borderCollapse = BorderCollapse.collapse
             whiteSpace = WhiteSpace.nowrap
             border = "1px solid black"
@@ -45,7 +46,8 @@ fun fcScheduleList() = fc("ScheduleList") { props: ScheduleListProps ->
                 +"Teacher"
             }
         }
-        props.scheduleList.sortedBy { it.elem.time }.map {
+        //table rows
+        props.scheduleList.sortedByDescending { it.elem.time }.map {
             tr {
                 td {
                     +it.elem.time

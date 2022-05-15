@@ -184,7 +184,7 @@ fun fcContainerSchedule() = fc("ScheduleContainer") { _: Props ->
     val addGroupMutation = useMutation<Any, Any, String, Any>(
         { groupId ->
         axios<String>(jso {
-            url = "${Config.lessonsURL}/$groupId/add"
+            url = "$scheduleURL$scheduleId/groups/$groupId/add"
             method = "Post"
             headers = json(
                 "Content-Type" to "application/json"
@@ -202,7 +202,7 @@ fun fcContainerSchedule() = fc("ScheduleContainer") { _: Props ->
     val deleteGroupMutation = useMutation<Any, Any, String, Any>(
         { groupId ->
         axios<String>(jso {
-            url = "${Config.lessonsURL}/$groupId/delete"
+            url = "$scheduleURL$scheduleId/groups/$groupId/delete"
             method = "Post"
             headers = json(
                 "Content-Type" to "application/json"

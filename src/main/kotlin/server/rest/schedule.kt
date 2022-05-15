@@ -6,14 +6,14 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.util.pipeline.*
-import server.model.Config
+import server.model.Config.Companion.schedulePath
 import server.model.Schedule
 import server.repo.RepoItem
 import server.repo.groupsRepo
 import server.repo.scheduleRepo
 
 fun Route.schedule() {
-    route(Config.schedulePath) {
+    route(schedulePath) {
         get {
             if (!scheduleRepo.isEmpty())
                 call.respond(scheduleRepo.findAll())
@@ -49,7 +49,7 @@ fun Route.schedule() {
             call.respondText("Schedule updated correctly", status = HttpStatusCode.Created)
         }
     }
-    route("${Config.schedulePath}{scheduleId}/{groupId}") {
+    route("$schedulePath{scheduleId}/groups/{groupId}") {
         post("/add") {
             when (val lsResult = lsParameters()) {
                 is LSOk -> {
