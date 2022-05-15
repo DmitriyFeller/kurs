@@ -7,12 +7,11 @@ import io.ktor.serialization.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import server.model.Config
-import server.repo.lessonsRepo
-import server.repo.lessonsRepoTestData
-import server.repo.studentsRepo
-import server.repo.studentsRepoTestData
+import server.repo.*
+import server.rest.cabinet
 import server.rest.lesson
-import server.rest.student
+import server.rest.group
+import server.rest.schedule
 
 fun main() {
     embeddedServer(
@@ -27,15 +26,19 @@ fun main() {
 
 fun Application.main(test: Boolean = true) {
     if(test) {
-        studentsRepoTestData.forEach { studentsRepo.create(it) }
+        groupsRepoTestData.forEach { groupsRepo.create(it) }
+        cabinetsRepoTestData.forEach { cabinetsRepo.create(it) }
         lessonsRepoTestData.forEach { lessonsRepo.create(it) }
+        scheduleRepoTestData.forEach { scheduleRepo.create(it) }
     }
     install(ContentNegotiation) {
         json()
     }
     routing {
         index()
-        student()
+        group()
+        cabinet()
         lesson()
+        schedule()
     }
 }

@@ -237,6 +237,7 @@ fun fcContainerSchedule() = fc("ScheduleContainer") { _: Props ->
                     Schedule(
                         name=schedule.elem.name,
                         teacher=teacher,
+                        cabinet=schedule.elem.cabinet
                     ),
                     null
                 )
@@ -245,6 +246,7 @@ fun fcContainerSchedule() = fc("ScheduleContainer") { _: Props ->
                 updateScheduleMutation.mutate(
                     Schedule(
                         name=schedule.elem.name,
+                        teacher=schedule.elem.teacher,
                         cabinet=cabinet
                     ),
                     null
